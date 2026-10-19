@@ -1,0 +1,844 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: Georgia, "Times New Roman", serif;
+    color: white;
+}
+
+
+/* =========================
+   MOVIE
+========================= */
+
+#movie {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================
+   WORLD
+========================= */
+
+#world {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+
+/* SKY */
+
+#sky {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #3c5360,
+            #16252e 45%,
+            #050a0d 100%
+        );
+
+    transition:
+        background 4s ease,
+        filter 4s ease;
+}
+
+
+/* STARS */
+
+#stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.9) 1px,
+            transparent 1px
+        );
+
+    background-size: 90px 90px;
+
+    opacity: .35;
+
+    animation:
+        starMove 60s linear infinite;
+}
+
+@keyframes starMove {
+
+    from {
+        background-position:
+            0 0;
+    }
+
+    to {
+        background-position:
+            500px 300px;
+    }
+}
+
+
+/* MOON */
+
+#moon {
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            white,
+            #ddd 55%,
+            transparent 70%
+        );
+
+    top: 13%;
+    right: 15%;
+
+    opacity: .8;
+
+    box-shadow:
+        0 0 70px
+        rgba(255,255,255,.3);
+
+    transition: all 4s ease;
+}
+
+
+/* CLOUDS */
+
+#clouds {
+    position: absolute;
+    width: 200%;
+    height: 40%;
+
+    bottom: 25%;
+    left: -50%;
+
+    opacity: .15;
+
+    background:
+        radial-gradient(
+            ellipse,
+            white 0%,
+            transparent 65%
+        );
+
+    filter: blur(30px);
+
+    animation:
+        cloudMove 70s linear infinite;
+}
+
+@keyframes cloudMove {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(25%);
+    }
+}
+
+
+/* MOUNTAINS */
+
+#mountains {
+
+    position: absolute;
+
+    left: -10%;
+    bottom: 20%;
+
+    width: 120%;
+    height: 35%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 40%,
+            #0a1517 40%
+            41%,
+            transparent 41%
+        ),
+
+        linear-gradient(
+            45deg,
+            transparent 40%,
+            #0b1719 40%
+            41%,
+            transparent 41%
+        );
+
+    background-size:
+        55% 100%,
+        55% 100%;
+
+    background-position:
+        left,
+        right;
+
+    opacity: .9;
+
+    transition:
+        transform 8s ease;
+}
+
+
+/* GROUND */
+
+#ground {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+    height: 28%;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            #263a2d,
+            #0b1510 70%
+        );
+
+    transition:
+        background 4s ease;
+}
+
+
+/* =========================
+   HUMAN SYMBOL
+========================= */
+
+#humanShadow {
+
+    position: absolute;
+
+    bottom: 19%;
+
+    left: 50%;
+
+    width: 80px;
+    height: 220px;
+
+    transform:
+        translateX(-50%)
+        scale(.7);
+
+    opacity: 0;
+
+    transition:
+        opacity 3s ease,
+        transform 5s ease;
+
+    filter:
+        drop-shadow(
+            0 0 30px
+            rgba(255,255,255,.25)
+        );
+}
+
+
+/* head */
+
+#humanShadow::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    left: 12px;
+    top: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.25),
+            rgba(255,255,255,.02)
+        );
+}
+
+
+/* body */
+
+#humanShadow::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 55px;
+    height: 150px;
+
+    border-radius:
+        40px 40px 20px 20px;
+
+    left: 12px;
+    top: 45px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.2),
+            rgba(255,255,255,.01)
+        );
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+#cinematicText {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 14%;
+
+    transform:
+        translateX(-50%);
+
+    width: min(900px, 85%);
+
+    text-align: center;
+
+    z-index: 10;
+
+    text-shadow:
+        0 3px 20px #000;
+}
+
+
+#chapter {
+
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: #d6c18b;
+
+    margin-bottom: 15px;
+
+    opacity: .9;
+}
+
+
+#sceneTitle {
+
+    font-size:
+        clamp(32px, 6vw, 75px);
+
+    font-weight: normal;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+
+#narration {
+
+    font-size:
+        clamp(16px, 2vw, 23px);
+
+    line-height: 1.8;
+
+    color: #eeeeee;
+
+    max-width: 780px;
+
+    margin: auto;
+
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    transition:
+        opacity 2s ease .3s,
+        transform 2s ease .3s;
+}
+
+
+.showText #sceneTitle,
+.showText #narration {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================
+   FADE
+========================= */
+
+#fade {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: black;
+
+    pointer-events: none;
+
+    z-index: 30;
+
+    opacity: 1;
+
+    transition:
+        opacity 2s ease;
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+#controls {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 10px 25px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.9)
+        );
+
+    z-index: 40;
+}
+
+
+#controls button {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    opacity: .8;
+
+    transition: .2s;
+}
+
+
+#controls button:hover {
+
+    opacity: 1;
+
+    transform:
+        scale(1.2);
+}
+
+
+#timeline {
+
+    flex: 1;
+
+    height: 4px;
+
+    background: rgba(255,255,255,.25);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+#progress {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: #d5bd83;
+
+    transition:
+        width .2s linear;
+}
+
+
+#timer {
+
+    font-family: monospace;
+
+    font-size: 13px;
+
+    color: #aaa;
+
+    min-width: 50px;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+#intro {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #253b3b,
+            #040708 70%
+        );
+
+    transition:
+        opacity 2s ease;
+}
+
+
+.introGlow {
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(220,200,140,.2),
+            transparent 70%
+        );
+
+    animation:
+        glow 5s infinite alternate;
+}
+
+
+@keyframes glow {
+
+    from {
+        transform: scale(.8);
+        opacity: .4;
+    }
+
+    to {
+        transform: scale(1.2);
+        opacity: .8;
+    }
+}
+
+
+#intro h1 {
+
+    position: relative;
+
+    font-size:
+        clamp(60px, 12vw, 140px);
+
+    letter-spacing: 8px;
+
+    font-weight: normal;
+
+    margin: 10px;
+}
+
+
+#intro h1 span,
+#ending h1 span {
+
+    font-size: .45em;
+
+    color: #d5bd83;
+}
+
+
+.smallTitle {
+
+    position: relative;
+
+    letter-spacing: 6px;
+
+    font-size: 12px;
+
+    color: #d5bd83;
+}
+
+
+.subtitle {
+
+    position: relative;
+
+    font-size: 22px;
+
+    letter-spacing: 3px;
+
+    color: #ddd;
+}
+
+
+.warning {
+
+    position: relative;
+
+    max-width: 500px;
+
+    margin: 35px 20px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #999;
+}
+
+
+#startBtn {
+
+    position: relative;
+
+    padding: 15px 35px;
+
+    border-radius: 30px;
+
+    border: 1px solid #d5bd83;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+
+    transition: .4s;
+}
+
+
+#startBtn:hover {
+
+    background: #d5bd83;
+
+    color: #111;
+
+    transform:
+        scale(1.05);
+}
+
+
+/* =========================
+   ENDING
+========================= */
+
+#ending {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 200;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #263b36,
+            #030605 75%
+        );
+
+    opacity: 0;
+}
+
+
+#ending h1 {
+
+    font-size:
+        clamp(50px, 9vw, 110px);
+
+    font-weight: normal;
+
+    letter-spacing: 5px;
+
+    margin: 10px;
+}
+
+
+#ending p {
+
+    max-width: 700px;
+
+    line-height: 1.8;
+
+    color: #ddd;
+
+    margin: 8px;
+}
+
+
+#ending .line {
+
+    width: 100px;
+
+    height: 1px;
+
+    background: #d5bd83;
+
+    margin: 25px;
+}
+
+
+.arabic {
+
+    font-size: 28px;
+
+    direction: rtl;
+
+    color: #d5bd83;
+
+    margin: 30px !important;
+}
+
+
+#ending .small {
+
+    color: #999;
+
+    font-size: 13px;
+}
+
+
+#ending button {
+
+    margin-top: 25px;
+
+    padding: 12px 30px;
+
+    border-radius: 25px;
+
+    border: 1px solid #d5bd83;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    #cinematicText {
+        bottom: 16%;
+    }
+
+    #moon {
+        width: 80px;
+        height: 80px;
+    }
+
+    #controls {
+        padding: 10px;
+    }
+
+}
