@@ -1346,3 +1346,115 @@ body {
         animation: none;
     }
 }
+
+/* =====================================
+   UPGRADE 6: FLOWING WATER
+===================================== */
+
+#ground {
+    position: relative;
+}
+
+/* Animated highlights across the river */
+#ground::before {
+    background-size: 100% 200%;
+
+    animation:
+        riverShimmer 5s ease-in-out infinite alternate,
+        waterFlow 7s linear infinite;
+}
+
+@keyframes waterFlow {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 200%;
+    }
+}
+
+/* Gentle water ripples */
+#ground::after {
+    content: "";
+    position: absolute;
+
+    left: 30%;
+    top: 8%;
+    width: 40%;
+    height: 70%;
+
+    pointer-events: none;
+    opacity: 0;
+
+    background: repeating-linear-gradient(
+        175deg,
+        transparent 0 12px,
+        rgba(230, 248, 246, 0.32) 13px 15px,
+        transparent 16px 28px
+    );
+
+    clip-path: polygon(
+        38% 0, 65% 0, 56% 25%,
+        75% 48%, 59% 70%, 68% 100%,
+        28% 100%, 42% 70%, 25% 48%,
+        44% 25%
+    );
+
+    animation: rippleFlow 4s linear infinite;
+}
+
+#world[data-landscape="garden"] #ground::after,
+#world[data-landscape="earth"] #ground::after {
+    opacity: 0.8;
+}
+
+@keyframes rippleFlow {
+    from {
+        background-position: 0 0;
+        transform: translateX(-1%);
+    }
+
+    to {
+        background-position: 0 60px;
+        transform: translateX(1%);
+    }
+}
+
+/* Optional waterfall-style streaks */
+.waterfall-streak {
+    position: absolute;
+    top: 0;
+    left: var(--left);
+
+    width: 2px;
+    height: var(--height);
+
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(230, 249, 255, 0.65),
+        transparent
+    );
+
+    animation: waterfallFlow var(--duration) linear infinite;
+}
+
+@keyframes waterfallFlow {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(200%);
+    }
+}
+
+/* Reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    #ground::before,
+    #ground::after,
+    .waterfall-streak {
+        animation: none !important;
+    }
+}
