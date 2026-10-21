@@ -1121,3 +1121,129 @@ body {
     opacity: 0.28;
     filter: blur(35px);
 }
+
+/* =====================================
+   UPGRADE 4: LIVING NATURE
+===================================== */
+
+.nature-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+#world[data-landscape="garden"] .nature-layer,
+#world[data-landscape="earth"] .nature-layer {
+    opacity: 1;
+}
+
+/* Floating leaves */
+
+.nature-leaf {
+    position: absolute;
+    top: -30px;
+    left: var(--left);
+
+    width: 12px;
+    height: 22px;
+
+    border-radius: 100% 0 100% 0;
+    background: var(--leaf-color);
+
+    opacity: 0;
+    animation: leafFall var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes leafFall {
+    0% {
+        transform: translate(0, -5vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 0.85;
+    }
+
+    50% {
+        transform: translate(45px, 45vh) rotate(180deg);
+    }
+
+    88% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(-25px, 110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Grass along the bottom */
+
+.grass-blade {
+    position: absolute;
+    bottom: 0;
+    left: var(--left);
+
+    width: 3px;
+    height: var(--height);
+
+    border-radius: 100% 0;
+    background: var(--grass-color);
+    transform-origin: bottom center;
+
+    animation: grassSway var(--duration) ease-in-out
+        var(--delay) infinite alternate;
+}
+
+@keyframes grassSway {
+    from {
+        transform: rotate(-8deg);
+    }
+
+    to {
+        transform: rotate(10deg);
+    }
+}
+
+/* Tiny wildflowers */
+
+.nature-flower {
+    position: absolute;
+    bottom: var(--bottom);
+    left: var(--left);
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+    background: var(--flower-color);
+
+    box-shadow: 0 0 8px var(--flower-color);
+    animation: flowerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes flowerGlow {
+    from {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .nature-leaf,
+    .grass-blade,
+    .nature-flower {
+        animation: none !important;
+    }
+}
