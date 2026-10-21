@@ -509,6 +509,18 @@ function loadScene(scene) {
 
         sky.style.background =
             scene.sky;
+       
+/* Select a landscape for each scene */
+const world = document.getElementById("world");
+
+if (scene.title === "The Garden") {
+    world.dataset.landscape = "garden";
+} else if (scene.title === "Earth") {
+    world.dataset.landscape = "earth";
+} else {
+    world.dataset.landscape = "mountains";
+}
+
 
 
         /* stars */
