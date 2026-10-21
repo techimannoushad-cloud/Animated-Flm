@@ -258,6 +258,42 @@ let currentSceneIndex = -1;
 
 let lastTimestamp = null;
 
+/* =================================
+   CINEMATIC DUST PARTICLES
+================================= */
+
+const particleContainer =
+    document.getElementById("particles");
+
+function createDustParticles() {
+    if (!particleContainer) return;
+
+    particleContainer.innerHTML = "";
+
+    for (let i = 0; i < 45; i++) {
+        const dust = document.createElement("span");
+
+        dust.className = "dust";
+
+        dust.style.left = Math.random() * 100 + "%";
+
+        dust.style.animationDuration =
+            (8 + Math.random() * 14) + "s";
+
+        dust.style.animationDelay =
+            (-Math.random() * 20) + "s";
+
+        const size = 2 + Math.random() * 3;
+
+        dust.style.width = size + "px";
+        dust.style.height = size + "px";
+
+        particleContainer.appendChild(dust);
+    }
+}
+
+createDustParticles();
+
 
 /* ==========================================
    ELEMENTS
