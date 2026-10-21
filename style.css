@@ -842,3 +842,150 @@ body {
     }
 
 }
+
+/* =================================
+   CINEMATIC ANIMATION UPGRADE
+================================= */
+
+#world {
+    transform-origin: center center;
+    animation: cameraDrift 24s ease-in-out infinite alternate;
+}
+
+@keyframes cameraDrift {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+/* Atmospheric golden glow */
+
+#ambientGlow {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    z-index: 2;
+
+    background: radial-gradient(
+        ellipse at 50% 60%,
+        rgba(237, 199, 120, 0.13),
+        transparent 55%
+    );
+
+    animation: ambientBreathe 8s ease-in-out infinite alternate;
+}
+
+@keyframes ambientBreathe {
+    from {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+/* Floating particles */
+
+#particles .dust {
+    position: absolute;
+    bottom: -15px;
+
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+
+    background: #f4d99a;
+    box-shadow: 0 0 12px rgba(255, 220, 150, 0.8);
+
+    pointer-events: none;
+
+    animation: dustFloat linear infinite;
+}
+
+@keyframes dustFloat {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate3d(50px, -105vh, 0);
+        opacity: 0;
+    }
+}
+
+/* Foreground depth */
+
+#foreground {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.42),
+        transparent 30%,
+        transparent 75%,
+        rgba(0, 0, 0, 0.15)
+    );
+}
+
+/* Film bars */
+
+#letterboxTop,
+#letterboxBottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 5vh;
+
+    background: #000;
+    z-index: 35;
+    pointer-events: none;
+}
+
+#letterboxTop {
+    top: 0;
+}
+
+#letterboxBottom {
+    bottom: 0;
+}
+
+/* Smoother environmental movement */
+
+#clouds {
+    will-change: transform;
+}
+
+#mountains {
+    will-change: transform;
+    transition: transform 10s ease-in-out;
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    #world,
+    #ambientGlow,
+    #clouds,
+    #stars {
+        animation: none !important;
+    }
+}
