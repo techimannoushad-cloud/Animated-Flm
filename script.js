@@ -295,6 +295,78 @@ function createDustParticles() {
 createDustParticles();
 
 
+/* =====================================
+   CREATE ANIMATED NATURE
+===================================== */
+
+function createNature() {
+    const world = document.getElementById("world");
+    if (!world || world.querySelector(".nature-layer")) return;
+
+    const layer = document.createElement("div");
+    layer.className = "nature-layer";
+    layer.setAttribute("aria-hidden", "true");
+
+    // Falling leaves
+    const leafColors = ["#789d4b", "#a6b96a", "#567b40"];
+
+    for (let i = 0; i < 14; i++) {
+        const leaf = document.createElement("span");
+        leaf.className = "nature-leaf";
+
+        leaf.style.setProperty("--left", Math.random() * 100 + "%");
+        leaf.style.setProperty("--delay", -Math.random() * 18 + "s");
+        leaf.style.setProperty("--duration", 12 + Math.random() * 12 + "s");
+        leaf.style.setProperty(
+            "--leaf-color",
+            leafColors[i % leafColors.length]
+        );
+
+        layer.appendChild(leaf);
+    }
+
+    // Swaying grass
+    const grassColors = ["#527b43", "#70964e", "#355e36"];
+
+    for (let i = 0; i < 65; i++) {
+        const blade = document.createElement("span");
+        blade.className = "grass-blade";
+
+        blade.style.setProperty("--left", Math.random() * 100 + "%");
+        blade.style.setProperty("--height", 12 + Math.random() * 25 + "px");
+        blade.style.setProperty("--delay", -Math.random() * 3 + "s");
+        blade.style.setProperty("--duration", 1.5 + Math.random() * 2 + "s");
+        blade.style.setProperty(
+            "--grass-color",
+            grassColors[i % grassColors.length]
+        );
+
+        layer.appendChild(blade);
+    }
+
+    // Small glowing wildflowers
+    const flowerColors = ["#f0d79b", "#e8c4b9", "#f3e8c0"];
+
+    for (let i = 0; i < 16; i++) {
+        const flower = document.createElement("span");
+        flower.className = "nature-flower";
+
+        flower.style.setProperty("--left", Math.random() * 100 + "%");
+        flower.style.setProperty("--bottom", Math.random() * 12 + "px");
+        flower.style.setProperty(
+            "--flower-color",
+            flowerColors[i % flowerColors.length]
+        );
+
+        layer.appendChild(flower);
+    }
+
+    world.appendChild(layer);
+}
+
+createNature();
+
+
 /* ==========================================
    ELEMENTS
 ========================================== */
