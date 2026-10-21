@@ -1247,3 +1247,102 @@ body {
         animation: none !important;
     }
 }
+
+/* =====================================
+   UPGRADE 5: CINEMATIC LIGHTING
+===================================== */
+
+/* Soft, moving beams of light */
+#ambientGlow::after {
+    content: "";
+    position: absolute;
+    inset: -40%;
+
+    background: repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0deg 12deg,
+        rgba(255, 225, 160, 0.055) 13deg 15deg,
+        transparent 16deg 28deg
+    );
+
+    -webkit-mask-image: radial-gradient(
+        ellipse at center,
+        black,
+        transparent 72%
+    );
+
+    mask-image: radial-gradient(
+        ellipse at center,
+        black,
+        transparent 72%
+    );
+
+    animation: lightRayDrift 35s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes lightRayDrift {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    to {
+        transform: rotate(12deg) scale(1.08);
+    }
+}
+
+/* Warm light for the garden */
+#world[data-landscape="garden"] #ambientGlow {
+    background: radial-gradient(
+        ellipse at 50% 35%,
+        rgba(255, 231, 166, 0.35),
+        rgba(160, 213, 139, 0.12) 45%,
+        transparent 75%
+    );
+}
+
+/* Cool, misty light for the opening */
+#world[data-landscape="mountains"] #ambientGlow {
+    background: radial-gradient(
+        ellipse at 50% 35%,
+        rgba(176, 210, 225, 0.20),
+        transparent 70%
+    );
+}
+
+/* Warm dawn light over Earth */
+#world[data-landscape="earth"] #ambientGlow {
+    background: radial-gradient(
+        ellipse at 50% 25%,
+        rgba(255, 192, 112, 0.32),
+        rgba(225, 146, 83, 0.12) 45%,
+        transparent 75%
+    );
+}
+
+/* Gentle atmospheric fog */
+#clouds {
+    will-change: transform, opacity;
+    transition: opacity 3s ease;
+}
+
+#world[data-landscape="garden"] #clouds {
+    opacity: 0.30;
+}
+
+#world[data-landscape="earth"] #clouds {
+    opacity: 0.24;
+}
+
+/* Smooth chapter fade */
+#fade {
+    will-change: opacity;
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    #ambientGlow::after {
+        animation: none;
+    }
+}
