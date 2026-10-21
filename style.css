@@ -1458,3 +1458,38 @@ body {
         animation: none !important;
     }
 }
+
+/* =====================================
+   UPGRADE 7: CINEMATIC CAMERA
+===================================== */
+
+/* The camera viewport stays fixed */
+#world {
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* JavaScript controls this camera layer */
+#world .camera-layer {
+    position: absolute;
+    inset: -5%;
+    width: 110%;
+    height: 110%;
+
+    transform-origin: center center;
+    will-change: transform;
+
+    pointer-events: none;
+}
+
+/* Keep the camera motion smooth */
+#world .camera-layer > * {
+    pointer-events: none;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    #world .camera-layer {
+        will-change: auto;
+    }
+}
